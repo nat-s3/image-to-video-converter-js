@@ -1,7 +1,15 @@
 # Image-to-video-converter-js
 Image to video conversion tool that runs in pure javascript.
 
-# Usage
+## Installation
+add HTML
+```html
+<head>
+    <script src="https://nat-s3.github.io/image-to-video-converter-js/src/image2video-converter.js" type="text/javascript"></script>
+</head>
+```
+
+## Usage
 ```js
 // Create UI
 const html = document.querySelector('html');
