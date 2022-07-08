@@ -12,6 +12,8 @@ const Image2Video = (function () {
     let onFinish = null;
 
     let nextDuration = null;
+    let maxLimit = 3840;
+    let minLimit = 2160;
 
     /**
      * 初期化を行う
@@ -157,7 +159,21 @@ const Image2Video = (function () {
 
         canvas.width = (frames[0].width ?? frames[0].naturalWidth ?? frames[0].clientWidth);
         canvas.height = (frames[0].height ?? frames[0].naturalHeight ?? frames[0].clientHeight ?? console.log('なぜかnull'));
+
+        if (Math.max(canvas.width, canvas.height) > maxLimit && (canvas.width * canvas.height) > maxLimit * minLimit) {
+            let rate = 1 / (Math.max(canvas.width, canvas.height) / maxLimit);
+            canvas.width  *= rate;
+            canvas.height *= rate;
+        }
+        if (Math.min(canvas.width, canvas.height) > minLimit && (canvas.width * canvas.height) > maxLimit * minLimit) {
+            let rate = 1 / (Math.min(canvas.width, canvas.height) / minLimit);
+            canvas.width  *= rate;
+            canvas.height *= rate;
+        }
+
+
         ctx = canvas.getContext("2d");
+
 
         const stream = canvas.captureStream();
         const mimeTypes = [
@@ -239,6 +255,18 @@ const Image2Video = (function () {
         setOnProgress: setProgress,
         setOnFinish: setOnFinish,
         setFrameDuration: setFrameDuration,
+        setMaxLimit: (v) => {
+            const maxData = Number.parseInt(v);
+            if (!isNaN(maxData)) {
+                maxLimit = maxData;
+            }
+        },
+        setMinLimit: (v) => {
+            const minData = Number.parseInt(v);
+            if (!isNaN(minData)) {
+                minLimit = minData;
+            }
+        },
         convert: convert,
         canvas: () => canvas,
         deinit: () => {
