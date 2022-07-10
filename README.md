@@ -4,9 +4,7 @@ Image to video conversion tool that runs in pure javascript.
 ## Installation
 add HTML
 ```html
-<head>
-    <script src="https://nat-s3.github.io/image-to-video-converter-js/src/image2video-converter.js" type="text/javascript"></script>
-</head>
+<script src="https://nat-s3.github.io/image-to-video-converter-js/src/image2video-converter.min.js" type="text/javascript"></script>
 ```
 
 ## Usage
@@ -47,3 +45,30 @@ recordButton.addEventListener('click', () => {
     Image2Video.convert();
 });
 ```
+
+----
+
+## Function Reference
+
+### `init()`
+### `getRecordState()`
+### `loadImages()`
+### `convert()`
+### `setOnLoad(callback)`
+### `setOnProgress((number) => {})`
+### `setOnFinish((blob, fileExtention) => {})`
+### `setOnLog((map) => {})`
+### `setFrameDuration(number)`
+### `setMaxLimit(number)`
+### `setMinLimit(number)`
+### `setCaptureRate(number)`
+### `setLogicDefault()`
+    Default mode is PrioritySize.
+
+### `setLogicPrioritySize()`
+    Set to the method to adjust image size
+
+### `setLogicPriorityFast()`
+    Set to a simple processing method
+
+### `canvas()`
